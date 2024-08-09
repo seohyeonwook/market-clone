@@ -56,4 +56,10 @@ main {
     bottom: 120px;
     right: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.write-btn:hover {
+  background-color: rgba(254,111,15,0.8);
 }
