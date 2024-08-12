@@ -3,10 +3,12 @@ const form = document.getElementById("write-form");
 const handleSubmitForm = async (event) => {
   event.preventDefault(); // submit console창에서 초기화 되는거 막기 위해서
   console.log("제출"); // submit잘 되는지 확인하기위해서
+  const body = new FormData(form);
+  body.append("insertAt", new Date().getTime());
   try {
     const res = await fetch("/items", {
       method: "POST",
-      body: new FormData(form),
+      body: body,
     });
     console.log("제출완료");
     const data = await res.json();

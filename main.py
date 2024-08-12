@@ -20,14 +20,16 @@ async def create_item(image:UploadFile,
                 # form 데이터 형식으로(묶어서 보낸다) 문자열로 올거다 위에 무조건import 되어있어야함
                 price:Annotated[int,Form()],
                 description:Annotated[str,Form()],
-                place:Annotated[str,Form()]
+                place:Annotated[str,Form()],
+                insertAt:Annotated[int,Form()]
                 ):
     # 어떤값 받을거냐 : 형식 지정
     # print(image,title,price,description,place) - 확인용
     image_bytes = await image.read()
     cur.execute(f"""
-                INSERT INTO items(title,image,price,description,place)
-                VALUES ("{title}","{image_bytes.hex()}",{price},"{description}","{place}")
+                INSERT INTO 
+                items(title,image,price,description,place,insertAt)
+                VALUES ("{title}","{image_bytes.hex()}",{price},"{description}","{place}",{insertAt})
                 """)
     # 숫자는 따움표 안들어간다 그래서 price는 따움표 없음
     con.commit()
