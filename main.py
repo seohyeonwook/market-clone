@@ -57,7 +57,19 @@ async def get_image(item_id):
     
     return Response(content=bytes.fromhex(image_bytes))
 
+@app.post("/signup")
+def signup(id:Annotated[str,Form()], 
+           password:Annotated[str,Form()],
+           name:Annotated[str,Form()],
+           email:Annotated[str,Form()]):
+    cur.execute(f"""
+                INSERT INTO users(id,name,email,password)
+                VALUES ("{id}","{name}","{email}","{password}")
+                """)
+    con.commit()
+    return "200" 
+
+
 app.mount("/",StaticFiles(directory = "frontend", html=True), name="frontend")
 # 2 - 기본 형식 - 만들고 터미널 열고 uvicorn main:app --reload 해서 서버열기 
 # crud는 mount 위에다 작성해야함
-# git 59 - 16:10초
